@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
                     src={img}
                     width="320"
                     height="180"
-                    alt="Course"
+                    alt="ProductImage"
                   />
                 </figure>
               </a>

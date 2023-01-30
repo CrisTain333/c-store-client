@@ -4,8 +4,8 @@ import ProductCard from "../../Components/ProductCard/ProductCard";
 
 const Product = () => {
   // const [category, setCategory] = useState([]);
-  const [products, setProduct] = useState([]);
-  const [filter, setFilter] = useState("");
+  // const [products, setProduct] = useState([]);
+  const [filter, setFilter] = useState("all");
   // Get category
   const { data: category = [], isLoading } = useQuery({
     queryKey: ["category"],
@@ -15,14 +15,17 @@ const Product = () => {
       return data;
     },
   });
+  const { data: products = [], isLoading: loading } = useQuery({
+    queryKey: ["products", filter],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/products/${filter}`);
+      const data = res.json();
+      return data;
+    },
+  });
 
   const handleSelect = (e) => {
     setFilter(e.target.value);
-    // const category = filter;
-    // console.log(filter);
-    // const filteredProduct = products.filter((x) => x.category === category);
-    // console.log(filteredProduct);
-    // setProduct(filteredProduct);
   };
   console.log(filter);
 
@@ -66,6 +69,11 @@ const Product = () => {
         </div>
         {/* right side  */}
         <div className="right_side col-span-10">
+          {loading && (
+            <div className="h-80 flex justify-center items-center">
+              <p>{"Loading .... "}</p>
+            </div>
+          )}
           <div className="right_card">
             <div className="grid gap-1 row-gap-1 sm:grid-cols-2 lg:grid-cols-3">
               {products.map((product) => (
