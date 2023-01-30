@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import brandLogo from "../../images/c-logo.png";
 
 const Navbar = () => {
+  // const [cart, setCart] = useState(
+  //   JSON.parse(localStorage.getItem("cart")) || []
+  // );
   const li = (
     <>
       <li>
         <Link>Home</Link>
       </li>
       <li>
-        <Link>Product</Link>
-      </li>
-      <li>
-        <Link>About</Link>
+        <Link to="/products">Product</Link>
       </li>
       <li>
         <Link>Contact</Link>
@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-md">
+      <div className="navbar bg-base-100 shadow-md fixed top-0 z-50">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -86,7 +86,7 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src="https://placeimg.com/80/80/people" />
+                <img src="https://placeimg.com/80/80/people" alt="" />
               </div>
             </label>
             <ul
@@ -94,25 +94,14 @@ const Navbar = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a className="justify-between">Profile</a>
+                <a className="justify-between" href="/">
+                  Profile
+                </a>
               </li>
               <li>
-                <a>Logout</a>
+                <a href="/">Logout</a>
               </li>
             </ul>
-          </div>
-        </div>
-      </div>
-      <div className="px-8 py-2 dark:bg-gray-900 dark:text-gray-100">
-        <div className="text-center py-2">
-          <div className="text-center">
-            <span>
-              Get up to 50% off your first order + free shipping,&nbsp;
-            </span>
-            <Link to="/singup" rel="noopener noreferrer" className="underline">
-              sign up
-            </Link>
-            today!
           </div>
         </div>
       </div>

@@ -6,11 +6,11 @@ import Navbar from "../Components/Navbar/Navbar";
 const MainLayout = () => {
   return (
     <>
-      <div className="">
+      <div className="mb-8">
         <Navbar></Navbar>
-        <Outlet></Outlet>
-        <Footer></Footer>
       </div>
+      <Outlet></Outlet>
+      <Footer></Footer>
     </>
   );
 };

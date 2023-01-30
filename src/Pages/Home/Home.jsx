@@ -6,7 +6,7 @@ import ProductCard from "../../Components/ProductCard/ProductCard";
 const Home = () => {
   const [products, setProduct] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch(`http://localhost:5000/products/all`)
       .then((res) => res.json())
       .then((data) => {
         const products = data;
@@ -149,7 +149,7 @@ const Home = () => {
               <div className="flex flex-col items-end px-3">
                 <img
                   className="object-cover mb-6 rounded shadow-lg h-28 sm:h-48 xl:h-56 w-28 sm:w-48 xl:w-56"
-                  src="https://i.imgur.com/caMoahZ.jpeg"
+                  src="https://hips.hearstapps.com/hmg-prod/images/42578450-010-b-1516375303.jpg?crop=1xw:1xh;center,top&resize=980:*"
                   alt=""
                 />
                 <img
