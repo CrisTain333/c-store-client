@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 
 const Product = () => {
-  const [category, setCategory] = useState([]);
+  // const [category, setCategory] = useState([]);
   const [products, setProduct] = useState([]);
   const [filter, setFilter] = useState("");
-  useEffect(() => {
-    fetch(`http://localhost:5000/products/category`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCategory(data);
-      });
-  }, []);
+  // Get category
+  const { data: category = [], isLoading } = useQuery({
+    queryKey: ["category"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/products/category`);
+      const data = res.json();
+      return data;
+    },
+  });
 
   const handleSelect = (e) => {
     setFilter(e.target.value);
@@ -33,6 +36,7 @@ const Product = () => {
               <div class="  w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
                 <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
                   Category
+                  <p>{isLoading && " Loading ......."}</p>
                 </h6>
                 <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
                   {category.map((x) => {
