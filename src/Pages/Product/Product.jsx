@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import ProductCard from "../../Components/ProductCard/ProductCard";
+import { ThreeCircles } from "react-loader-spinner";
 
 const Product = () => {
   // const [category, setCategory] = useState([]);
@@ -27,14 +28,14 @@ const Product = () => {
   const handleSelect = (e) => {
     setFilter(e.target.value);
   };
-  console.log(filter);
+  console.log(products);
 
   return (
     <div>
       <div className="main_div grid grid-cols-12 w-[95%] mx-auto">
         {/* Left Side  */}
         <div className="left_Side col-span-2">
-          <div className="left_Card ">
+          <div className="left_Card   sticky top-20">
             <div class="flex items-center justify-center p-4">
               <div class="  w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
                 <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
@@ -68,10 +69,21 @@ const Product = () => {
           </div>
         </div>
         {/* right side  */}
-        <div className="right_side col-span-10">
+        <div className="right_side col-span-10 mt-10">
           {loading && (
             <div className="h-80 flex justify-center items-center">
-              <p>{"Loading .... "}</p>
+              <ThreeCircles
+                height="100"
+                width="100"
+                color="#f9a900"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel="three-circles-rotating"
+                outerCircleColor=""
+                innerCircleColor=""
+                middleCircleColor=""
+              />
             </div>
           )}
           <div className="right_card">

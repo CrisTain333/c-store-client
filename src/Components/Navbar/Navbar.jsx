@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import brandLogo from "../../images/c-logo.png";
 
 const Navbar = () => {
+  // const [cart, setCart] = useState(
+  //   JSON.parse(localStorage.getItem("cart")) || []
+  // );
   const li = (
     <>
       <li>
@@ -10,9 +13,6 @@ const Navbar = () => {
       </li>
       <li>
         <Link to="/products">Product</Link>
-      </li>
-      <li>
-        <Link>About</Link>
       </li>
       <li>
         <Link>Contact</Link>
@@ -102,19 +102,6 @@ const Navbar = () => {
                 <a href="/">Logout</a>
               </li>
             </ul>
-          </div>
-        </div>
-      </div>
-      <div className="px-8 py-2 dark:bg-gray-900 dark:text-gray-100">
-        <div className="text-center py-2">
-          <div className="text-center">
-            <span>
-              Get up to 50% off your first order + free shipping,&nbsp;
-            </span>
-            <Link to="/singup" rel="noopener noreferrer" className="underline">
-              sign up
-            </Link>
-            today!
           </div>
         </div>
       </div>
