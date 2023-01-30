@@ -4,19 +4,25 @@ import ProductCard from "../../Components/ProductCard/ProductCard";
 const Product = () => {
   const [category, setCategory] = useState([]);
   const [products, setProduct] = useState([]);
+  const [filter, setFilter] = useState("");
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch(`http://localhost:5000/products/category`)
       .then((res) => res.json())
       .then((data) => {
-        const catrogyes = data.map((x) => {
-          return x.category;
-        });
-        let unique = catrogyes.filter((v, i, a) => a.indexOf(v) === i);
-        setCategory(unique);
-        setProduct(data);
+        setCategory(data);
       });
   }, []);
-  console.log(category);
+
+  const handleSelect = (e) => {
+    setFilter(e.target.value);
+    // const category = filter;
+    // console.log(filter);
+    // const filteredProduct = products.filter((x) => x.category === category);
+    // console.log(filteredProduct);
+    // setProduct(filteredProduct);
+  };
+  console.log(filter);
+
   return (
     <div>
       <div className="main_div grid grid-cols-12 w-[95%] mx-auto">
@@ -33,14 +39,15 @@ const Product = () => {
                     return (
                       <li class="flex items-center">
                         <input
+                          onChange={handleSelect}
                           id={x}
                           type="checkbox"
-                          value=""
+                          value={x}
                           class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                         />
 
                         <label
-                          for={x}
+                          htmlFor={x}
                           class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
                         >
                           {x}
