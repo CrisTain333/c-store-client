@@ -15,7 +15,7 @@ const Home = () => {
       });
   }, []);
   return (
-    <div>
+    <div className="mt-20">
       {/* <h2 className="font-extrabold text-transparent text-8xl bg-clip-text bg-gradient-to-r from-primary to-secondary">
         Hello World
       </h2> */}

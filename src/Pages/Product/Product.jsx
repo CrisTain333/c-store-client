@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import { ThreeCircles } from "react-loader-spinner";
-import { Toaster } from "react-hot-toast";
 
 const Product = () => {
   // const [category, setCategory] = useState([]);

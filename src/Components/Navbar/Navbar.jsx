@@ -11,7 +11,7 @@ const Navbar = () => {
   const li = (
     <>
       <li>
-        <Link>Home</Link>
+        <Link to="/">Home</Link>
       </li>
       <li>
         <Link to="/products">Product</Link>
@@ -62,7 +62,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{li}</ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end mr-2">
+          <div className="dropdown dropdown-end mr-2 flex items-center">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <svg
@@ -84,8 +84,14 @@ const Navbar = () => {
                 </span>
               </div>
             </label>
+            <button
+              type="button"
+              className="px-8 py-2 mx-3 text-sm font-semibold rounded bg-gradient-to-r from-primary to-secondary text-white"
+            >
+              Login
+            </button>
           </div>
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end ">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img src="https://placeimg.com/80/80/people" alt="" />
