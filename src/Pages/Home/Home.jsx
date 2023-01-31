@@ -60,7 +60,7 @@ const Home = () => {
               {/* <!--   ✅ Product card 1 - Starts Here 👇 --> */}
               {products.map((product) => (
                 <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-                  <a href="#">
+                  <Link to="/products">
                     <img
                       src={product?.img}
                       alt="Product"
@@ -80,7 +80,7 @@ const Home = () => {
                         </p>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               ))}
               {/* <!--   🛑 Product card 1 - Ends Here  --> */}

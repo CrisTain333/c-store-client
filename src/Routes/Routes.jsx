@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import SingIn from "../Authentication/SingIn";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
 import Product from "../Pages/Product/Product";
@@ -22,5 +23,9 @@ export const router = createBrowserRouter([
         element: <ShoppingCart />,
       },
     ],
+  },
+  {
+    path: "/signIn",
+    element: <SingIn />,
   },
 ]);
