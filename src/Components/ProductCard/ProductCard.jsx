@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { productContext } from "../../Context/ProductProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 const ProductCard = ({ product }) => {
   let { setProductCart } = useContext(productContext);
@@ -17,14 +18,16 @@ const ProductCard = ({ product }) => {
       existingProduct.quantity++;
     } else {
       cart.push({ ...product });
+      toast.success("Added To Cart");
     }
     localStorage.setItem("cart", JSON.stringify(cart));
-    setCart([...cart]);
     setProductCart([...cart]);
+    setCart([...cart]);
   };
 
   return (
     <>
+      <Toaster position="bottom-left" reverseOrder={false} />
       <section class="flex flex-col  justify-center antialiased  text-gray-600 p-4">
         <div class="">
           {/* <!-- Card --> */}
@@ -79,12 +82,12 @@ const ProductCard = ({ product }) => {
                   class="flex justify-center  w-full"
                   onClick={() => addToCart(product)}
                 >
-                  <a
+                  <button
                     class="font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-gradient-to-r from-primary to-secondary text-white w-full"
                     href="#0"
                   >
                     Add To Cart
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
