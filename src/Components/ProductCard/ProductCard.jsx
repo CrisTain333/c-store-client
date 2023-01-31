@@ -1,7 +1,7 @@
 import React from "react";
 import { AiFillStar } from "react-icons/ai";
 
-const ProductCard = (product) => {
+const ProductCard = ({ product }) => {
   const { img, name, price, ratings } = product;
   // const [cart, setCart] = useState(
   //   JSON.parse(localStorage.getItem("cart")) || []
