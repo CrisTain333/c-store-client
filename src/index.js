@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ProductProvider from "./Context/ProductProvider";
+import AuthProvider from "./Context/AuthProvider";
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ProductProvider>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  </ProductProvider>
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider>
+      <ProductProvider>
+        <App />
+      </ProductProvider>
+    </AuthProvider>
+  </QueryClientProvider>
 );
