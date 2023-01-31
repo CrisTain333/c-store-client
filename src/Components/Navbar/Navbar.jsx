@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
+import { productContext } from "../../Context/ProductProvider";
 import brandLogo from "../../images/c-logo.png";
 
 const Navbar = () => {
-  // const [cart, setCart] = useState(
-  //   JSON.parse(localStorage.getItem("cart")) || []
-  // );
+  const { productCart } = useContext(productContext);
+  const { user } = useContext(AuthContext);
+  // console.log(productCart);
+  console.log(user);
+
   const li = (
     <>
       <li>
-        <Link>Home</Link>
+        <Link to="/">Home</Link>
       </li>
       <li>
         <Link to="/products">Product</Link>
@@ -18,14 +23,14 @@ const Navbar = () => {
         <Link>Contact</Link>
       </li>
       <li>
-        <Link>Dashboard</Link>
+        <Link to="/dashboard">Dashboard</Link>
       </li>
     </>
   );
 
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-md fixed top-0 z-50">
+      <div className="navbar bg-base-100 shadow-md fixed top-0 z-50 ">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -60,32 +65,42 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{li}</ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end mr-2">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
-              <div className="indicator">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
-                <span className="badge badge-sm indicator-item bg-primary text-white">
-                  8
-                </span>
-              </div>
-            </label>
+          <div className="dropdown dropdown-end mr-2 flex items-center">
+            <Link to="/cart">
+              <label tabIndex={0} className="btn btn-ghost btn-circle">
+                <div className="indicator">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  <span className="badge badge-sm indicator-item bg-primary text-white">
+                    {productCart.length}
+                  </span>
+                </div>
+              </label>
+            </Link>
+            <Link to="/signIn">
+              <button
+                type="button"
+                className="px-8 py-2 mx-3 text-sm font-semibold rounded bg-gradient-to-r from-primary to-secondary text-white"
+              >
+                Login
+              </button>
+            </Link>
           </div>
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end ">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
+              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                 <img src="https://placeimg.com/80/80/people" alt="" />
               </div>
             </label>
@@ -93,11 +108,6 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <a className="justify-between" href="/">
-                  Profile
-                </a>
-              </li>
               <li>
                 <a href="/">Logout</a>
               </li>

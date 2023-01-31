@@ -28,10 +28,10 @@ const Product = () => {
   const handleSelect = (e) => {
     setFilter(e.target.value);
   };
-  console.log(products);
 
   return (
     <div>
+      {/* <Toaster /> */}
       <div className="main_div grid grid-cols-12 w-[95%] mx-auto">
         {/* Left Side  */}
         <div className="left_Side col-span-2">
