@@ -1,12 +1,20 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/AuthProvider";
+import { saveUser } from "../helper/saveUser";
 import uploadImage from "../helper/uploadImage";
 import brandLogo from "../images/c-logo.png";
+import swal from "sweetalert";
+import { ThreeDots } from "react-loader-spinner";
 
 const SignUp = () => {
+  const [loading, setLoading] = useState(false);
+  const { createUser } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState();
 
   const handleSignUp = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
@@ -14,9 +22,21 @@ const SignUp = () => {
     const profilePicture = e.target.profilePicture.files[0];
     const formData = new FormData();
     formData.append("image", profilePicture);
-    // const imageUri = await uploadImage(formData);
-
-    console.log(name, email, password, profilePicture);
+    const imageUri = await uploadImage(formData);
+    createUser(email, password)
+      .then((UserCredential) => {
+        if (UserCredential) {
+          saveUser(name, email, password, imageUri.data.display_url);
+          swal("Great", "Account Create Successful", "success");
+          setLoading(false);
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        swal(errorCode, errorMessage, "error");
+        setLoading(false);
+      });
   };
 
   const imageChange = (e) => {
@@ -94,7 +114,22 @@ const SignUp = () => {
                       <circle cx="8.5" cy="7" r="4" />
                       <path d="M20 8v6M23 11h-6" />
                     </svg>
-                    <span class="ml-3">Sign Up</span>
+                    <span class="ml-3">
+                      {loading ? (
+                        <ThreeDots
+                          height="20"
+                          width="20"
+                          radius="9"
+                          color="#FFFFFF"
+                          ariaLabel="three-dots-loading"
+                          wrapperStyle={{}}
+                          wrapperClassName=""
+                          visible={true}
+                        />
+                      ) : (
+                        "Sign Up"
+                      )}
+                    </span>
                   </button>
                 </form>
                 <p className="mt-3">

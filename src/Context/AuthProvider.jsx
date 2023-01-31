@@ -17,9 +17,13 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
   return (
-    <AuthContext.Provider value={{ singInUser }}>
+    <AuthContext.Provider value={{ singInUser, loading, createUser }}>
       {children}
     </AuthContext.Provider>
   );
