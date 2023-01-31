@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import brandLogo from "../../images/c-logo.png";
 
 const Navbar = () => {
-  // const [cart, setCart] = useState(
-  //   JSON.parse(localStorage.getItem("cart")) || []
-  // );
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
   const li = (
     <>
       <li>
@@ -78,7 +78,7 @@ const Navbar = () => {
                   />
                 </svg>
                 <span className="badge badge-sm indicator-item bg-primary text-white">
-                  8
+                  {cart.length}
                 </span>
               </div>
             </label>
