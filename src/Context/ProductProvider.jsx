@@ -1,14 +1,12 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 export const productContext = createContext();
 
 const ProductProvider = ({ children }) => {
-  const name = {
-    Cristain: "22",
-  };
+  const [productCart, setProductCart] = useState({});
 
   return (
-    <productContext.Provider value={{ name }}>
+    <productContext.Provider value={{ productCart, setProductCart }}>
       {children}
     </productContext.Provider>
   );

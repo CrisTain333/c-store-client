@@ -14,7 +14,6 @@ const Home = () => {
         setProduct(treadingProduct.slice(0, 9));
       });
   }, []);
-  console.log(products);
   return (
     <div>
       {/* <h2 className="font-extrabold text-transparent text-8xl bg-clip-text bg-gradient-to-r from-primary to-secondary">

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { AiFillStar } from "react-icons/ai";
+import { productContext } from "../../Context/ProductProvider";
 
 const ProductCard = ({ product }) => {
+  let { setProductCart } = useContext(productContext);
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
@@ -17,9 +20,9 @@ const ProductCard = ({ product }) => {
     }
     localStorage.setItem("cart", JSON.stringify(cart));
     setCart([...cart]);
+    setProductCart([...cart]);
   };
 
-  console.log(cart);
   return (
     <>
       <section class="flex flex-col  justify-center antialiased  text-gray-600 p-4">

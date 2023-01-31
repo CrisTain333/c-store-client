@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { productContext } from "../../Context/ProductProvider";
 import brandLogo from "../../images/c-logo.png";
 
 const Navbar = () => {
-  const { name } = useContext(productContext);
-  console.log(name);
+  const { productCart } = useContext(productContext);
+  // console.log(productCart);
 
   const li = (
     <>
@@ -80,7 +80,7 @@ const Navbar = () => {
                   />
                 </svg>
                 <span className="badge badge-sm indicator-item bg-primary text-white">
-                  {/* {cart.length} */}
+                  {productCart.length}
                 </span>
               </div>
             </label>
