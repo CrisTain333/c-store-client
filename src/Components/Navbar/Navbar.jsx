@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { productContext } from "../../Context/ProductProvider";
 import brandLogo from "../../images/c-logo.png";
 
 const Navbar = () => {
-  const [cart, setCart] = useState(
-    JSON.parse(localStorage.getItem("cart")) || []
-  );
+  const { name } = useContext(productContext);
+  console.log(name);
+
   const li = (
     <>
       <li>
@@ -25,7 +27,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-md fixed top-0 z-50">
+      <div className="navbar bg-base-100 shadow-md fixed top-0 z-50 ">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -78,7 +80,7 @@ const Navbar = () => {
                   />
                 </svg>
                 <span className="badge badge-sm indicator-item bg-primary text-white">
-                  {cart.length}
+                  {/* {cart.length} */}
                 </span>
               </div>
             </label>

@@ -11,7 +11,6 @@ const ProductCard = ({ product }) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let existingProduct = cart.find((p) => p._id === product._id);
     if (existingProduct) {
-      console.log(existingProduct);
       existingProduct.quantity++;
     } else {
       cart.push({ ...product });
