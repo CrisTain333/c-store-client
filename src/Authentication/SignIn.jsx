@@ -4,7 +4,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "../Context/AuthProvider";
 import swal from "sweetalert";
 
-const SingIn = () => {
+const SignIn = () => {
   const { singInUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
@@ -109,4 +109,4 @@ const SingIn = () => {
   );
 };
 
-export default SingIn;
+export default SignIn;
