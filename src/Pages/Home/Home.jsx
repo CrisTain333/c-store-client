@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from "react-router-dom";
-import ProductCard from "../../Components/ProductCard/ProductCard";
+import tk from "../../images/taka.png";
 
 const Home = () => {
   const [products, setProduct] = useState([]);
@@ -55,10 +55,36 @@ const Home = () => {
             </h2>
             <hr />
           </div>
-          <div className="grid gap-1 row-gap-1 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
+          <div className="w-[90%] mx-auto">
+            <section class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+              {/* <!--   ✅ Product card 1 - Starts Here 👇 --> */}
+              {products.map((product) => (
+                <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                  <a href="#">
+                    <img
+                      src={product?.img}
+                      alt="Product"
+                      class="h-80 w-72 object-cover rounded-t-xl"
+                    />
+                    <div class="px-4 py-3 w-72">
+                      <span class="text-gray-400 mr-3 uppercase text-xs">
+                        {product?.seller}
+                      </span>
+                      <p class="text-lg font-bold text-black truncate block capitalize">
+                        {product?.name}
+                      </p>
+                      <div class="flex items-center">
+                        <p class="text-lg font-semibold text-black cursor-auto my-3 flex items-center">
+                          <img src={tk} className="h-5 mr-1" alt="" />
+                          {product?.price}
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              ))}
+              {/* <!--   🛑 Product card 1 - Ends Here  --> */}
+            </section>
           </div>
 
           <div className="w-full flex item justify-center mt-5">
