@@ -1,12 +1,15 @@
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
 import { productContext } from "../../Context/ProductProvider";
 import brandLogo from "../../images/c-logo.png";
 
 const Navbar = () => {
   const { productCart } = useContext(productContext);
+  const { user } = useContext(AuthContext);
   // console.log(productCart);
+  console.log(user);
 
   const li = (
     <>
@@ -86,12 +89,14 @@ const Navbar = () => {
                 </div>
               </label>
             </Link>
-            <button
-              type="button"
-              className="px-8 py-2 mx-3 text-sm font-semibold rounded bg-gradient-to-r from-primary to-secondary text-white"
-            >
-              Login
-            </button>
+            <Link to="/signIn">
+              <button
+                type="button"
+                className="px-8 py-2 mx-3 text-sm font-semibold rounded bg-gradient-to-r from-primary to-secondary text-white"
+              >
+                Login
+              </button>
+            </Link>
           </div>
           <div className="dropdown dropdown-end ">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

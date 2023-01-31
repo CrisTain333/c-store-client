@@ -1,14 +1,27 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import app from "../Firebase/Firebase.init";
 
 export const AuthContext = createContext();
+const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-  const user = {
-    name: "cristain",
+  const [user, setUser] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const singInUser = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ singInUser }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 export default AuthProvider;
