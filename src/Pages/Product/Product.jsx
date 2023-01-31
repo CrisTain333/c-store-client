@@ -28,7 +28,6 @@ const Product = () => {
   const handleSelect = (e) => {
     setFilter(e.target.value);
   };
-  console.log(products);
 
   return (
     <div>
