@@ -17,6 +17,7 @@ const SignIn = () => {
     singInUser(email, password)
       .then((user) => {
         setLoading(false);
+        swal("Grate", "Login Successful", "error");
         console.log(user);
       })
       .catch((error) => {
