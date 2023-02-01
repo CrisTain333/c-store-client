@@ -7,7 +7,7 @@ import brandLogo from "../../images/c-logo.png";
 
 const Navbar = () => {
   const { productCart } = useContext(productContext);
-  const { user } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
   // console.log(productCart);
   console.log(user);
 
@@ -105,8 +105,8 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <a href="/">Logout</a>
+              <li onClick={signOutUser}>
+                <p>Logout</p>
               </li>
             </ul>
           </div>

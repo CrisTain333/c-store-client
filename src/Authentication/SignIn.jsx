@@ -3,10 +3,15 @@ import { useContext } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "../Context/AuthProvider";
 import swal from "sweetalert";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const { singInUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,8 +22,8 @@ const SignIn = () => {
     singInUser(email, password)
       .then((user) => {
         setLoading(false);
-        swal("Grate", "Login Successful", "error");
-        console.log(user);
+        swal("Grate", "Login Successful", "success");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorCode = error.code;

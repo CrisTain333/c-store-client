@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 import { saveUser } from "../helper/saveUser";
 import uploadImage from "../helper/uploadImage";
@@ -12,6 +12,10 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const { createUser } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState();
+
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
 
   const handleSignUp = async (e) => {
     setLoading(true);
@@ -28,6 +32,7 @@ const SignUp = () => {
         if (UserCredential) {
           saveUser(name, email, password, imageUri.data.display_url);
           swal("Great", "Account Create Successful", "success");
+          navigate(from, { replace: true });
           setLoading(false);
         }
       })
