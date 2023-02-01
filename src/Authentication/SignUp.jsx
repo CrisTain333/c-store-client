@@ -49,7 +49,7 @@ const SignUp = () => {
     <div>
       <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
         <div class="lg:w-[50%] xl:w-5/12 p-6 sm:p-12">
-          <div className="flex items-center justify-center ">
+          <div className="flex items-center justify-center">
             <span className="text-3xl font-semibold">Sign up for</span>
             <img src={brandLogo} className="h-10 w-10" alt="" />
             <span className="text-3xl font-semibold">Store</span>
