@@ -26,7 +26,7 @@ const SignUp = () => {
     const profilePicture = e.target.profilePicture.files[0];
     const formData = new FormData();
     formData.append("image", profilePicture);
-    const imageUri = await uploadImage(formData);
+    const imageUri = await uploadImage(profilePicture);
     createUser(email, password)
       .then((UserCredential) => {
         if (UserCredential) {
@@ -42,6 +42,7 @@ const SignUp = () => {
         swal(errorCode, errorMessage, "error");
         setLoading(false);
       });
+    setLoading(false);
   };
 
   const imageChange = (e) => {

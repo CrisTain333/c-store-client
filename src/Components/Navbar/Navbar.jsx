@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -8,8 +9,17 @@ import brandLogo from "../../images/c-logo.png";
 const Navbar = () => {
   const { productCart } = useContext(productContext);
   const { user, signOutUser } = useContext(AuthContext);
-  // console.log(productCart);
-  console.log(user);
+
+  const { data: userInfo = [] } = useQuery({
+    queryKey: ["userInfo", user],
+    queryFn: async () => {
+      let res = await fetch(`http://localhost:5000/user/${user?.email}`);
+      let data = await res.json();
+      return data;
+    },
+  });
+
+  console.log(userInfo);
 
   const li = (
     <>
@@ -86,30 +96,34 @@ const Navbar = () => {
                 </div>
               </label>
             </Link>
-            <Link to="/signIn">
-              <button
-                type="button"
-                className="px-8 py-2 mx-3 text-sm font-semibold rounded bg-gradient-to-r from-primary to-secondary text-white"
+            {!user && (
+              <Link to="/signIn">
+                <button
+                  type="button"
+                  className="px-8 py-2 mx-3 text-sm font-semibold rounded bg-gradient-to-r from-primary to-secondary text-white"
+                >
+                  Login
+                </button>
+              </Link>
+            )}
+          </div>
+          {user && (
+            <div className="dropdown dropdown-end ">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                  <img src={userInfo?.profilePicture} alt="" />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
-                Login
-              </button>
-            </Link>
-          </div>
-          <div className="dropdown dropdown-end ">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src="https://placeimg.com/80/80/people" alt="" />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li onClick={signOutUser}>
-                <p>Logout</p>
-              </li>
-            </ul>
-          </div>
+                <li onClick={signOutUser}>
+                  <p>Logout</p>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
