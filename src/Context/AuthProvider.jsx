@@ -12,6 +12,7 @@ export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
+  const [fetchAgain, setFetchAgain] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -40,7 +41,15 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ singInUser, loading, createUser, user, signOutUser }}
+      value={{
+        singInUser,
+        loading,
+        createUser,
+        user,
+        signOutUser,
+        fetchAgain,
+        setFetchAgain,
+      }}
     >
       {children}
     </AuthContext.Provider>

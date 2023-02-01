@@ -1,14 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
-import { productContext } from "../../Context/ProductProvider";
+// import { productContext } from "../../Context/ProductProvider";
 import brandLogo from "../../images/c-logo.png";
 
 const Navbar = () => {
-  const { productCart } = useContext(productContext);
+  const { fetchAgain, setFetchAgain } = useContext(AuthContext);
+  const [cart, setCart] = useState([]);
   const { user, signOutUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    setFetchAgain(true);
+    fetch(`http://localhost:5000/order/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCart(data);
+        setFetchAgain(false);
+      });
+  }, [user?.email, cart.length, fetchAgain]);
 
   const { data: userInfo = [] } = useQuery({
     queryKey: ["userInfo", user],
@@ -22,6 +35,8 @@ const Navbar = () => {
       return data;
     },
   });
+
+  console.log(cart);
 
   const li = (
     <>
@@ -93,7 +108,7 @@ const Navbar = () => {
                     />
                   </svg>
                   <span className="badge badge-sm indicator-item bg-primary text-white">
-                    {productCart.length}
+                    {cart.length}
                   </span>
                 </div>
               </label>
