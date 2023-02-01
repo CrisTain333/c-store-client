@@ -23,8 +23,6 @@ const Navbar = () => {
     },
   });
 
-  console.log(userInfo);
-
   const li = (
     <>
       <li>
