@@ -15,6 +15,10 @@ const Navbar = () => {
     queryFn: async () => {
       let res = await fetch(`http://localhost:5000/user/${user?.email}`);
       let data = await res.json();
+      if (data.status === 200) {
+        const token = data.token;
+        localStorage.setItem("c-AuthToken", token);
+      }
       return data;
     },
   });
