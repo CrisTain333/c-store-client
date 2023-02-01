@@ -5,6 +5,7 @@ import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
 import Product from "../Pages/Product/Product";
 import ShoppingCart from "../Pages/ShoppingCart/ShoppingCart";
+import PrivateRoute from "./Private/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <Product />,
+        element: (
+          <PrivateRoute>
+            <Product />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/cart",

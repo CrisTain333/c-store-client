@@ -1,15 +1,42 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
-import { productContext } from "../../Context/ProductProvider";
+// import { productContext } from "../../Context/ProductProvider";
 import brandLogo from "../../images/c-logo.png";
 
 const Navbar = () => {
-  const { productCart } = useContext(productContext);
-  const { user } = useContext(AuthContext);
-  // console.log(productCart);
-  console.log(user);
+  const { fetchAgain, setFetchAgain } = useContext(AuthContext);
+  const [cart, setCart] = useState([]);
+  const { user, signOutUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    setFetchAgain(true);
+    fetch(`http://localhost:5000/order/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCart(data);
+        setFetchAgain(false);
+      });
+  }, [user?.email, cart.length, fetchAgain]);
+
+  const { data: userInfo = [] } = useQuery({
+    queryKey: ["userInfo", user],
+    queryFn: async () => {
+      let res = await fetch(`http://localhost:5000/user/${user?.email}`);
+      let data = await res.json();
+      if (data.status === 200) {
+        const token = data.token;
+        localStorage.setItem("c-AuthToken", token);
+      }
+      return data;
+    },
+  });
+
+  console.log(cart);
 
   const li = (
     <>
@@ -21,9 +48,6 @@ const Navbar = () => {
       </li>
       <li>
         <Link>Contact</Link>
-      </li>
-      <li>
-        <Link to="/dashboard">Dashboard</Link>
       </li>
     </>
   );
@@ -84,35 +108,39 @@ const Navbar = () => {
                     />
                   </svg>
                   <span className="badge badge-sm indicator-item bg-primary text-white">
-                    {productCart.length}
+                    {cart.length}
                   </span>
                 </div>
               </label>
             </Link>
-            <Link to="/signIn">
-              <button
-                type="button"
-                className="px-8 py-2 mx-3 text-sm font-semibold rounded bg-gradient-to-r from-primary to-secondary text-white"
+            {!user && (
+              <Link to="/signIn">
+                <button
+                  type="button"
+                  className="px-8 py-2 mx-3 text-sm font-semibold rounded bg-gradient-to-r from-primary to-secondary text-white"
+                >
+                  Login
+                </button>
+              </Link>
+            )}
+          </div>
+          {user && (
+            <div className="dropdown dropdown-end ">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                  <img src={userInfo?.profilePicture} alt="" />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
-                Login
-              </button>
-            </Link>
-          </div>
-          <div className="dropdown dropdown-end ">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src="https://placeimg.com/80/80/people" alt="" />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a href="/">Logout</a>
-              </li>
-            </ul>
-          </div>
+                <li onClick={signOutUser}>
+                  <p>Logout</p>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>

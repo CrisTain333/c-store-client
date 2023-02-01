@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 import { saveUser } from "../helper/saveUser";
 import uploadImage from "../helper/uploadImage";
@@ -13,6 +13,10 @@ const SignUp = () => {
   const { createUser } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState();
 
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
   const handleSignUp = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -22,12 +26,13 @@ const SignUp = () => {
     const profilePicture = e.target.profilePicture.files[0];
     const formData = new FormData();
     formData.append("image", profilePicture);
-    const imageUri = await uploadImage(formData);
+    const imageUri = await uploadImage(profilePicture);
     createUser(email, password)
       .then((UserCredential) => {
         if (UserCredential) {
           saveUser(name, email, password, imageUri.data.display_url);
           swal("Great", "Account Create Successful", "success");
+          navigate(from, { replace: true });
           setLoading(false);
         }
       })
@@ -37,6 +42,7 @@ const SignUp = () => {
         swal(errorCode, errorMessage, "error");
         setLoading(false);
       });
+    setLoading(false);
   };
 
   const imageChange = (e) => {
@@ -49,7 +55,7 @@ const SignUp = () => {
     <div>
       <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
         <div class="lg:w-[50%] xl:w-5/12 p-6 sm:p-12">
-          <div className="flex items-center justify-center ">
+          <div className="flex items-center justify-center">
             <span className="text-3xl font-semibold">Sign up for</span>
             <img src={brandLogo} className="h-10 w-10" alt="" />
             <span className="text-3xl font-semibold">Store</span>
