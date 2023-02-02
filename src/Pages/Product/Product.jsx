@@ -4,9 +4,8 @@ import ProductCard from "../../Components/ProductCard/ProductCard";
 import { ThreeCircles } from "react-loader-spinner";
 
 const Product = () => {
-  // const [category, setCategory] = useState([]);
-  // const [products, setProduct] = useState([]);
   const [filter, setFilter] = useState("all");
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   // Get category
   const { data: category = [], isLoading } = useQuery({
     queryKey: ["category"],
