@@ -10,7 +10,11 @@ const ProductProvider = ({ children }) => {
   const { data: cart = [], refetch } = useQuery({
     queryKey: ["userCart", user?.email],
     queryFn: async () => {
-      let res = await fetch(`http://localhost:5000/order/${user?.email}`);
+      let res = await fetch(`http://localhost:5000/order/${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("c-AuthToken")}`,
+        },
+      });
       let data = await res.json();
       return data;
     },
