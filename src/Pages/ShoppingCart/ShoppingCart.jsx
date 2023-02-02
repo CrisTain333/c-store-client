@@ -8,7 +8,7 @@ const ShoppingCart = () => {
   const handleDelete = async (id) => {
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
+
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -126,15 +126,11 @@ const ShoppingCart = () => {
                 <span class="font-semibold text-sm uppercase">Items 3</span>
                 <span class="font-semibold text-sm">590$</span>
               </div>
-              <div>
-                <label class="font-medium inline-block mb-3 text-sm uppercase">
-                  Shipping
-                </label>
-                <select class="block p-2 text-gray-600 w-full text-sm">
-                  <option>Standard shipping - $10.00</option>
-                </select>
+              <div class="flex justify-between mt-5 mb-5">
+                <span class="font-medium text-sm">Shipping</span>
+                <span class="font-semibold text-sm">590$</span>
               </div>
-              <div class="py-10">
+              <div class="py-5">
                 <label
                   for="promo"
                   class="font-semibold inline-block mb-3 text-sm uppercase"
@@ -145,7 +141,7 @@ const ShoppingCart = () => {
                   type="text"
                   id="promo"
                   placeholder="Enter your code"
-                  class="p-2 text-sm w-full"
+                  class="p-2 text-sm w-full rounded border-2"
                 />
               </div>
               <button class="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
