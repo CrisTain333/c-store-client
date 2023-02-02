@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { AiFillStar } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../Context/AuthProvider";
+import { productContext } from "../../Context/ProductProvider";
 
 const ProductCard = ({ product }) => {
   const { user } = useContext(AuthContext);
+  const { refetch } = useContext(productContext);
   const { img, name, price, ratings } = product;
 
   const handleAddProduct = (product) => {
@@ -31,6 +33,7 @@ const ProductCard = ({ product }) => {
         } else if (data.acknowledged) {
           toast.success("Added to cart");
         }
+        refetch();
       });
   };
 
