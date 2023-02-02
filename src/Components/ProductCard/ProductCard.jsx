@@ -2,12 +2,17 @@ import React, { useContext } from "react";
 import { AiFillStar } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../Context/AuthProvider";
+import { productContext } from "../../Context/ProductProvider";
+import { useState } from "react";
 
 const ProductCard = ({ product }) => {
+  const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
+  const { refetch } = useContext(productContext);
   const { img, name, price, ratings } = product;
 
   const handleAddProduct = (product) => {
+    setLoading(true);
     const cart = {
       email: user.email,
       productId: product._id,
@@ -31,7 +36,10 @@ const ProductCard = ({ product }) => {
         } else if (data.acknowledged) {
           toast.success("Added to cart");
         }
+        refetch();
+        setLoading(false);
       });
+    setLoading(false);
   };
 
   return (
@@ -92,8 +100,11 @@ const ProductCard = ({ product }) => {
                   onClick={() => handleAddProduct(product)}
                 >
                   <button
-                    class="font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-gradient-to-r from-primary to-secondary text-white w-full"
+                    class={`font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-gradient-to-r from-primary to-secondary text-white w-full ${
+                      loading && "cursor-not-allowed"
+                    }`}
                     href="#0"
+                    disabled={loading}
                   >
                     Add To Cart
                   </button>
