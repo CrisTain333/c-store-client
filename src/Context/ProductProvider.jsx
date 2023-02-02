@@ -16,8 +16,16 @@ const ProductProvider = ({ children }) => {
     },
   });
 
+  const deleteProduct = async (id) => {
+    let res = await fetch(`http://localhost:5000/order/delete/${id}`, {
+      method: "DELETE",
+    });
+    let data = await res.json();
+    return data;
+  };
+
   return (
-    <productContext.Provider value={{ refetch, cart }}>
+    <productContext.Provider value={{ refetch, cart, deleteProduct }}>
       {children}
     </productContext.Provider>
   );

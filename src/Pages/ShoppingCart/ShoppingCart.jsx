@@ -1,10 +1,29 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { productContext } from "../../Context/ProductProvider";
-
+import swal from "sweetalert";
 const ShoppingCart = () => {
-  let { cart } = useContext(productContext);
-  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  let { cart, refetch, deleteProduct } = useContext(productContext);
+
+  const handleDelete = async (id) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        const res = await deleteProduct(id);
+        if (res.deletedCount > 0) {
+          swal("Poof! Your Product has been deleted!", {
+            icon: "success",
+          });
+        }
+        refetch();
+      }
+    });
+  };
 
   return (
     <div>
@@ -35,7 +54,9 @@ const ShoppingCart = () => {
                         return (
                           <tr>
                             <td>
-                              <button>
+                              <button
+                                onClick={() => handleDelete(product?.productId)}
+                              >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   viewBox="0 0 24 24"
