@@ -3,19 +3,8 @@ import { Link } from "react-router-dom";
 import { productContext } from "../../Context/ProductProvider";
 
 const ShoppingCart = () => {
-  let { productCart } = useContext(productContext);
+  let { cart } = useContext(productContext);
 
-  const removeFromDb = (id) => {
-    console.log(id);
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      const shoppingCart = JSON.parse(storedCart);
-      if (id in shoppingCart) {
-        delete shoppingCart[id];
-        localStorage.setItem("cart", JSON.stringify(shoppingCart));
-      }
-    }
-  };
   return (
     <div>
       <div className="mt-20">
@@ -40,7 +29,7 @@ const ShoppingCart = () => {
                   Total
                 </h3>
               </div>
-              {productCart.map((product) => {
+              {cart.map((product) => {
                 return (
                   <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
                     <div class="flex w-2/5">
@@ -54,7 +43,7 @@ const ShoppingCart = () => {
                           {product?.seller}
                         </span>
                         <button
-                          onClick={() => removeFromDb(product?._id)}
+                          // onClick={() => removeFromDb(product?._id)}
                           class="font-semibold hover:text-red-500 text-gray-500 text-xs"
                         >
                           Remove
