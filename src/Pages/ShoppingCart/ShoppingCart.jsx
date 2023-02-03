@@ -106,7 +106,7 @@ const ShoppingCart = () => {
               </div>
               <Link
                 to="/products"
-                class="flex font-semibold text-indigo-600 text-sm mt-10"
+                class="flex font-semibold text-indigo-600 text-sm mt-10 "
               >
                 <svg
                   class="fill-current mr-2 text-indigo-600 w-4"
