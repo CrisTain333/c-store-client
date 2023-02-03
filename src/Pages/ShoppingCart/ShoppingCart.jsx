@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { productContext } from "../../Context/ProductProvider";
 import swal from "sweetalert";
+import tkIcon from "../../images/taka.png";
 const ShoppingCart = () => {
   let { cart, refetch, deleteProduct } = useContext(productContext);
 
@@ -24,6 +25,14 @@ const ShoppingCart = () => {
       }
     });
   };
+
+  let total = 0;
+  let shipping = 0;
+  for (const product of cart) {
+    console.log(product.productPrice);
+    total = total + product.productPrice * product.productQuantity;
+    console.log(total);
+  }
 
   return (
     <div>
@@ -123,8 +132,12 @@ const ShoppingCart = () => {
                 Order Summary
               </h1>
               <div class="flex justify-between mt-10 mb-5">
-                <span class="font-semibold text-sm uppercase">Items 3</span>
-                <span class="font-semibold text-sm">590$</span>
+                <span class="font-semibold text-sm uppercase">
+                  Items {cart?.length}
+                </span>
+                <span class="font-semibold text-sm flex items-center">
+                  {total} <img src={tkIcon} className="h-4" alt="" />
+                </span>
               </div>
               <div class="flex justify-between mt-5 mb-5">
                 <span class="font-medium text-sm">Shipping</span>
