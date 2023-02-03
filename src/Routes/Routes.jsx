@@ -6,6 +6,7 @@ import Home from "../Pages/Home/Home";
 import Product from "../Pages/Product/Product";
 import ShoppingCart from "../Pages/ShoppingCart/ShoppingCart";
 import PrivateRoute from "./Private/PrivateRoute";
+import Payment from "../Pages/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +27,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <ShoppingCart />,
+        element: (
+          <PrivateRoute>
+            <ShoppingCart />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/Payment",
+        element: <Payment />,
       },
     ],
   },

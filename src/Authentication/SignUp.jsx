@@ -27,11 +27,13 @@ const SignUp = () => {
     const formData = new FormData();
     formData.append("image", profilePicture);
     const imageUri = await uploadImage(profilePicture);
+    console.log(imageUri);
     createUser(email, password)
       .then((UserCredential) => {
+        console.log(UserCredential);
         if (UserCredential) {
-          saveUser(name, email, password, imageUri.data.display_url);
-          swal("Great", "Account Create Successful", "success");
+          saveUser(name, email, password, imageUri.url);
+          swal(`Welcome ${name}`, "Account Create Successful", "success");
           navigate(from, { replace: true });
           setLoading(false);
         }

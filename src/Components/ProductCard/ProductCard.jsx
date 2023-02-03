@@ -20,6 +20,7 @@ const ProductCard = ({ product }) => {
       productPrice: product.price,
       productQuantity: product.quantity,
       productImage: product.img,
+      shipping: product.shipping,
     };
 
     fetch(`http://localhost:5000/order`, {

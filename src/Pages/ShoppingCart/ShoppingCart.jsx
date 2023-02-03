@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { productContext } from "../../Context/ProductProvider";
 import swal from "sweetalert";
+import tkIcon from "../../images/taka.png";
 const ShoppingCart = () => {
   let { cart, refetch, deleteProduct } = useContext(productContext);
 
@@ -24,6 +25,16 @@ const ShoppingCart = () => {
       }
     });
   };
+
+  let total = 0;
+  let shipping = 0;
+  for (const product of cart) {
+    console.log(product.productPrice);
+    total = total + product.productPrice * product.productQuantity;
+    shipping = shipping + product.shipping;
+    console.log(total);
+  }
+  const grandTotal = total + shipping;
 
   return (
     <div>
@@ -106,7 +117,7 @@ const ShoppingCart = () => {
               </div>
               <Link
                 to="/products"
-                class="flex font-semibold text-indigo-600 text-sm mt-10"
+                class="flex font-semibold text-indigo-600 text-sm mt-10 "
               >
                 <svg
                   class="fill-current mr-2 text-indigo-600 w-4"
@@ -123,12 +134,18 @@ const ShoppingCart = () => {
                 Order Summary
               </h1>
               <div class="flex justify-between mt-10 mb-5">
-                <span class="font-semibold text-sm uppercase">Items 3</span>
-                <span class="font-semibold text-sm">590$</span>
+                <span class="font-semibold text-sm uppercase">
+                  Items {cart?.length}
+                </span>
+                <span class="font-semibold text-sm flex items-center">
+                  {total} <img src={tkIcon} className="h-4" alt="" />
+                </span>
               </div>
               <div class="flex justify-between mt-5 mb-5">
                 <span class="font-medium text-sm">Shipping</span>
-                <span class="font-semibold text-sm">590$</span>
+                <span class="font-semibold text-sm flex items-center">
+                  {shipping} <img src={tkIcon} className="h-4" alt="" />
+                </span>
               </div>
               <div class="py-5">
                 <label
@@ -150,7 +167,9 @@ const ShoppingCart = () => {
               <div class="border-t mt-8">
                 <div class="flex font-semibold justify-between py-6 text-sm uppercase">
                   <span>Total cost</span>
-                  <span>$600</span>
+                  <span className="flex items-center">
+                    {grandTotal} <img src={tkIcon} className="h-4" alt="" />
+                  </span>
                 </div>
                 <button class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
                   Checkout
