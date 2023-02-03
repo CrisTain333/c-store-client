@@ -11,7 +11,7 @@ const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
 
   const { data: userInfo = [] } = useQuery({
-    queryKey: ["userInfo", user],
+    queryKey: ["userInfo", user?.email],
     queryFn: async () => {
       let res = await fetch(`http://localhost:5000/user/${user?.email}`);
       let data = await res.json();
@@ -24,6 +24,7 @@ const Navbar = () => {
   });
 
   console.log(cart);
+  console.log(userInfo);
 
   const li = (
     <>
@@ -115,7 +116,7 @@ const Navbar = () => {
             <div className="dropdown dropdown-end ">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img src={userInfo?.profilePicture} alt="" />
+                  <img src={userInfo?.user?.profilePicture} alt="" />
                 </div>
               </label>
               <ul

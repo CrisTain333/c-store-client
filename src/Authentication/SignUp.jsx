@@ -30,9 +30,10 @@ const SignUp = () => {
     console.log(imageUri);
     createUser(email, password)
       .then((UserCredential) => {
+        console.log(UserCredential);
         if (UserCredential) {
           saveUser(name, email, password, imageUri.url);
-          swal("Great", "Account Create Successful", "success");
+          swal(`Welcome ${name}`, "Account Create Successful", "success");
           navigate(from, { replace: true });
           setLoading(false);
         }
