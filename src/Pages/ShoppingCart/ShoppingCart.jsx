@@ -57,6 +57,7 @@ const ShoppingCart = () => {
                         <th>Quantity</th>
                         <th>Price</th>
                         <th>Total</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -108,6 +109,11 @@ const ShoppingCart = () => {
                                 tk
                               </button>
                             </th>
+                            <td>
+                              <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase rounded-md">
+                                Pay
+                              </button>
+                            </td>
                           </tr>
                         );
                       })}
