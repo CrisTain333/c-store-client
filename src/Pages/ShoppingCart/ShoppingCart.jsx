@@ -36,6 +36,16 @@ const ShoppingCart = () => {
   }
   const grandTotal = total + shipping;
 
+  const handleSinglePayment = ({ id }) => {
+    fetch("http://localhost:5000/payment/init", {
+      body: JSON.stringify(id),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   return (
     <div>
       <div className="mt-20">
@@ -110,7 +120,12 @@ const ShoppingCart = () => {
                               </button>
                             </th>
                             <td>
-                              <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase rounded-md">
+                              <button
+                                className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase rounded-md"
+                                onClick={() =>
+                                  handleSinglePayment(product?.productId)
+                                }
+                              >
                                 Pay
                               </button>
                             </td>
