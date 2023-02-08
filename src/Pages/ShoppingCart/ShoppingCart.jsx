@@ -37,8 +37,11 @@ const ShoppingCart = () => {
   const grandTotal = total + shipping;
 
   const handleSinglePayment = ({ id }) => {
+    const productId = {
+      id,
+    };
     fetch("http://localhost:5000/payment/init", {
-      body: JSON.stringify(id),
+      body: JSON.stringify(productId),
     })
       .then((res) => res.json())
       .then((data) => {
