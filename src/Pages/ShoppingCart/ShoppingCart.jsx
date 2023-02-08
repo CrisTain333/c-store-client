@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { productContext } from "../../Context/ProductProvider";
 import swal from "sweetalert";
 import tkIcon from "../../images/taka.png";
+import { AuthContext } from "../../Context/AuthProvider";
 const ShoppingCart = () => {
+  const { user } = useContext(AuthContext);
   let { cart, refetch, deleteProduct } = useContext(productContext);
 
   const handleDelete = async (id) => {
@@ -39,6 +41,7 @@ const ShoppingCart = () => {
   const handleSinglePayment = (id) => {
     const productId = {
       id,
+      email: user?.email,
     };
     fetch("http://localhost:5000/payment/init", {
       method: "POST",
@@ -49,7 +52,7 @@ const ShoppingCart = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        window.location.replace(data.url);
       });
   };
 
