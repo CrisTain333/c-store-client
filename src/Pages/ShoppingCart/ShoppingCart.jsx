@@ -130,14 +130,20 @@ const ShoppingCart = () => {
                               </button>
                             </th>
                             <td>
-                              <button
-                                className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase rounded-md"
-                                onClick={() =>
-                                  handleSinglePayment(product?.productId)
-                                }
-                              >
-                                Pay
-                              </button>
+                              {product?.paid ? (
+                                <label className="bg-green-500 px-5 py-2 text-sm text-white uppercase rounded-md">
+                                  Paid
+                                </label>
+                              ) : (
+                                <button
+                                  className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase rounded-md"
+                                  onClick={() =>
+                                    handleSinglePayment(product?.productId)
+                                  }
+                                >
+                                  Pay
+                                </button>
+                              )}
                             </td>
                           </tr>
                         );
