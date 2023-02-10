@@ -9,7 +9,7 @@ const ProductCard = ({ product }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
   const { refetch } = useContext(productContext);
-  const { img, name, price, ratings } = product;
+  const { img, name, price, ratings, seller } = product;
 
   const handleAddProduct = (product) => {
     setLoading(true);
@@ -46,75 +46,45 @@ const ProductCard = ({ product }) => {
   return (
     <>
       <Toaster position="bottom-left" reverseOrder={false} />
-      <section class="flex flex-col  justify-center antialiased  text-gray-600 p-4">
-        <div class="">
-          {/* <!-- Card --> */}
-          <div class="max-w-xs mx-auto ">
-            <div class="flex flex-col bg-white shadow-lg rounded-lg overflow-hidden">
-              {/* <!-- Image --> */}
-              <a
-                class="block focus:outline-none focus-visible:ring-2"
-                href="#0"
+      <div class="w-full ">
+        <div class="bg-white rounded-lg m-h-64 p-2 transform hover:translate-y-2 hover:shadow-xl transition duration-300">
+          <figure class="mb-2">
+            <img src={img} alt="" class="h-64 ml-auto mr-auto" />
+          </figure>
+          <div class="rounded-lg p-4 bg-gradient-to-r from-primary to-secondary flex flex-col">
+            <div>
+              <h5 class="text-white text-2xl font-bold leading-none">
+                {name?.slice(0, 20)}
+              </h5>
+              <span class="text-xs text-white leading-none">{seller}</span>
+            </div>
+            <div class="flex items-center">
+              <div class="text-lg text-white font-light">Tk {price}</div>
+              <button
+                href="javascript:;"
+                class="rounded-full bg-white text-white hover:bg-white hover:text-purple-900 hover:shadow-xl focus:outline-none w-10 h-10 flex ml-auto transition duration-300"
+                onClick={() => handleAddProduct(product)}
               >
-                <figure class="relative h-0 pb-[56.25%] overflow-hidden">
-                  <img
-                    class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out"
-                    src={img}
-                    width="320"
-                    height="180"
-                    alt="ProductImage"
-                  />
-                </figure>
-              </a>
-              {/* <!-- Card Content --> */}
-              <div class="flex-grow flex flex-col p-5">
-                {/* <!-- Card body --> */}
-                <div class="flex-grow">
-                  {/* <!-- Header --> */}
-                  <header class="mb-3">
-                    <a
-                      class="block focus:outline-none focus-visible:ring-2"
-                      href="#0"
-                    >
-                      <h3 class="text-lg text-gray-900 font-extrabold leading-snug">
-                        {name?.slice(0, 50)}
-                      </h3>
-                    </a>
-                  </header>
-                  {/* <!-- Content --> */}
-                  <div class="mb-8">
-                    <p className="text-lg mb-2">
-                      Price : <span className="font-semibold">{price}</span> Tk
-                    </p>
-                    <p className="flex items-center ">
-                      Rating :{" "}
-                      <span className="flex items-center ml-2">
-                        {ratings}
-                        <AiFillStar className="ml-1 text-yellow-400"></AiFillStar>
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                {/* <!-- Card footer --> */}
-                <div
-                  class="flex justify-center  w-full"
-                  onClick={() => handleAddProduct(product)}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="stroke-current text-black m-auto"
                 >
-                  <button
-                    class={`font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-gradient-to-r from-primary to-secondary text-white w-full ${
-                      loading && "cursor-not-allowed"
-                    }`}
-                    href="#0"
-                    disabled={loading}
-                  >
-                    Add To Cart
-                  </button>
-                </div>
-              </div>
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 };
