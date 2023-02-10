@@ -37,6 +37,9 @@ const Navbar = () => {
       <li>
         <Link>Contact</Link>
       </li>
+      <li>
+        <Link>My Order</Link>
+      </li>
     </>
   );
 
