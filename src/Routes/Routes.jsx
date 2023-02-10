@@ -7,6 +7,7 @@ import Product from "../Pages/Product/Product";
 import ShoppingCart from "../Pages/ShoppingCart/ShoppingCart";
 import PrivateRoute from "./Private/PrivateRoute";
 import Payment from "../Pages/Payment/Payment";
+import MyOrder from "../Pages/MyOrder/MyOrder";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/Payment/success",
         element: <Payment />,
+      },
+      {
+        path: "/order",
+        element: <MyOrder />,
       },
     ],
   },
