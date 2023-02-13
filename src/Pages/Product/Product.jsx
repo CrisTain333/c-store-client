@@ -36,8 +36,8 @@ const Product = () => {
         <div className="left_Side col-span-2">
           <div className="left_Card   sticky top-20">
             <div class="flex items-center justify-center p-4">
-              <div class="  w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
-                <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+              <div class="  w-56 p-3 bg-white rounded-lg shadow ">
+                <h6 class="mb-3 text-sm font-medium text-gray-900">
                   Category
                   <p>{isLoading && " Loading ......."}</p>
                 </h6>
@@ -55,7 +55,7 @@ const Product = () => {
 
                         <label
                           htmlFor={x}
-                          class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+                          class="ml-2 text-sm font-medium text-gray-900 "
                         >
                           {x}
                         </label>

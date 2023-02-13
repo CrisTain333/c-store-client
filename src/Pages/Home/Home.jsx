@@ -20,7 +20,7 @@ const Home = () => {
         Hello World
       </h2> */}
       <section>
-        <div className="dark:bg-violet-400">
+        <div className="">
           <div className="container flex flex-col items-center px-4 py-8  mx-auto text-center    dark:text-gray-900">
             <h1 className="text-5xl font-bold leading-none sm:text-6xl xl:max-w-3xl dark:text-gray-900">
               “<span className="text-primary">Cleanse</span> & Debloat or Cut
